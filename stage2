@@ -22,6 +22,14 @@ then
         ExecStart = \"\${pkgs.bash}/bin/bash -i /etc/nixos-in-place/setup-network\";
       };
     };
+    
+    # Support for managing authorized_keys from Digital Ocean webinterface.
+    fileSystems."/root/.ssh" = {
+      device = "/old-root/root/.ssh";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+    }
   "
   mkdir -p /nixos/etc/nixos-in-place
   cp /nixos-in-place/setup-network /nixos/etc/nixos-in-place/
